@@ -165,4 +165,36 @@ db.orders.aggregate([{ $match: { status: "urgent" } }]);
 //Stage2
 // $match, $group, $sum - aggregate operators
 
-db.orders.aggregate([{ $match: { status: "urgent" } },{$group:{_id:"$productName", totalUrgentQuantity: {$sum: "$quantity"}}}]);
+db.orders.aggregate([
+  { $match: { status: "urgent" } },
+  {
+    $group: { _id: "$productName", totalUrgentQuantity: { $sum: "$quantity" } },
+  },
+]);
+
+//Task - 10:40
+
+// 1. Update the language for all documents -  english as default language
+
+db.books.updateMany({}, { $set: { language: "English" } });
+
+db.books.find({}).pretty();
+
+// 2. update "The Secret" - language to Tamil
+db.books.updateOne({ name: "The Secret" }, { $set: { language: "Tamil" } });
+
+// 3. update "The 5 AM Club" - language to Hindi
+db.books.updateOne({ name: "The 5 AM Club" }, { $set: { language: "Hindi" } });
+
+// 4. update "The Secret" - rating from 8.8 to 10
+
+db.books.updateOne({ name: "The Secret" }, { $set: { rating: 10 } });
+
+// 5. delete all books with rating > 8.8
+
+db.books.deleteOne({ rating: { $gt: 8.8 } })
+
+
+db.books.deleteOne({ rating: { $gt: 8 } })
+
+db.books.deleteMany({ rating: { $gt: 8 } })
