@@ -14,6 +14,7 @@ const books = [
     trailer: "https://www.youtube.com/embed/PU2r9tDwZ1M",
     summary:
       "The novel tells the story of a livestock pig named Wilbur and his friendship with a barn spider named Charlotte. When Wilbur is in danger of being slaughtered by the farmer, Charlotte writes messages praising Wilbur in her web in order to persuade the farmer to let him live.",
+    language: "English",
   },
   {
     id: "002",
@@ -23,6 +24,7 @@ const books = [
     trailer: "https://www.youtube.com/embed/gqviJoSkf6U",
     summary:
       "Attitude, In psychology, a mental position with regard to a fact or state. Attitudes reflect a tendency to classify objects and events and to react to them with some consistency. Attitudes are not directly observable but rather are inferred from the objective, evaluative responses a person makes.",
+    language: "English",
   },
   {
     id: "003",
@@ -32,6 +34,7 @@ const books = [
     trailer: "https://www.youtube.com/embed/san61qTwWsU",
     summary:
       "There's no secret to The Secret. The book and movie simply state that your thoughts control the universe. Through this “law of attraction” you “manifest” your desires. “It is exactly like placing an order from a catalogue",
+    language: "Tamil",
   },
   {
     id: "004",
@@ -41,6 +44,7 @@ const books = [
     trailer: "https://www.youtube.com/embed/o8wUR2JAeUw",
     summary:
       "'Discover Your Destiny' is a story about enlightenment of Dar Sanderson, who is an incredibly ambitious executive. The book throws light on the fact that 'happiness and harmony can never be achieved and assured by SUCCESS'. Dar is an achiever in almost every aspect of life, yet he is void from the inside.",
+    language: "Telugu",
   },
   {
     id: "005",
@@ -50,6 +54,7 @@ const books = [
     trailer: "https://www.youtube.com/embed/Kxvp3eOYphY",
     summary:
       "In The 5 AM Club: Own Your Morning. Elevate Your Life, he uses a fictitious story about a billionaire mentor teaching a struggling artist and an entrepreneur about the importance of waking up early to show how revolutionary it is for success.",
+    language: "English",
   },
   {
     id: "006",
@@ -60,6 +65,7 @@ const books = [
     summary:
       "Louise expands on her philosophy of loving the self and shows you how to overcome emotional barriers through learning to listen to your inner voice, loving the child within, letting your true feelings out, and much more!",
     trailer: "https://www.youtube.com/embed/4UzY6ksC6gU",
+    language: "Hindi",
   },
   {
     name: "elon musk: tesla, spacex, and the quest for a fantastic future",
@@ -69,6 +75,7 @@ const books = [
     summary: "elon musk: tesla, spacex, and the quest for a fantastic future",
     trailer: "elon musk: tesla, spacex, and the quest for a fantastic future",
     id: "007",
+    language: "English",
   },
   {
     name: "Harry potter",
@@ -79,6 +86,7 @@ const books = [
       "Adaptation of the first of J.K. Rowling's popular children's novels about Harry Potter, a boy who learns on his eleventh birthday that he is the orphaned son of two powerful wizards and possesses unique magical powers of his own.",
     trailer: "https://www.youtube.com/embed/fFGS4zZWGoA",
     id: "008",
+    language: "English",
   },
 ];
 
@@ -86,8 +94,17 @@ app.get("/", (req, res) => {
   res.send("Hello Everyone🥳🥳🥳");
 });
 
+//Task
+// /books - all the books
+// /books?language=English -  only English books
+// /books?rating=8 - books with rating 8
+// /books?language=English&rating=8
+
 app.get("/books", (req, res) => {
-  res.send(books);
+  const { language } = req.query;
+  console.log(req.query, language);
+  const result = books.filter((bk) => bk.language == language);
+  res.send(result);
 });
 
 //get Books by ID
