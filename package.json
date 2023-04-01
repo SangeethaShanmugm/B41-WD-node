@@ -1,0 +1,22 @@
+{
+  "name": "b41-wd-node",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SangeethaShanmugm/B41-WD-node.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SangeethaShanmugm/B41-WD-node/issues"
+  },
+  "homepage": "https://github.com/SangeethaShanmugm/B41-WD-node#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

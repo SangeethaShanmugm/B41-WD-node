@@ -25,9 +25,9 @@ const quote2 = "Live more, worry less🥳";
 //Task 2
 // node fs.js 20 ->  20 files to be created | note-1.txt, note-2.txt...note-20.txt
 
-const [, , noOfFiles] = process.argv;
-//console.log(noOfFiles)
-const quote3 = "Happy Day";
+// const [, , noOfFiles] = process.argv;
+// //console.log(noOfFiles)
+// const quote3 = "Happy Day";
 // for (let i = 1; i <= noOfFiles; i++) {
 //   fs.writeFile(`./backup/note-${i}.txt`, quote3, (err) => {
 //     if (err) {
@@ -48,18 +48,43 @@ const quote3 = "Happy Day";
 
 //append file
 
-const niceQuote = "\nMake everyday a little less ordinarily🥳";
+// const niceQuote = "\nMake everyday a little less ordinarily🥳";
 
-fs.appendFile("./nice.txt", niceQuote, (err) => {
-  console.log("Completed writing nice.txt");
-});
+// fs.appendFile("./nice.txt", niceQuote, (err) => {
+//   console.log("Completed writing nice.txt");
+// });
 
-fs.unlink("./toRemove.txt", (err) => {
-  console.log("Deleted Successfully");
-});
+// fs.unlink("./toRemove.txt", (err) => {
+//   console.log("Deleted Successfully");
+// });
 
-fs.readdir("./backup", (err, files) => {
-  console.log("All file names", files);
-});
+// fs.readdir("./backup", (err, files) => {
+//   console.log("All file names", files);
+// });
 
 //Task - Delete all the files in the backup folder
+
+// fs.readdir("./backup", (err, data) => {
+
+//   data.forEach(fileName => {
+//     fs.unlink(`./backup/${fileName}`, (err) => {
+//       console.log("Deleted Successfully", fileName);
+//     });
+
+//   })
+
+// });
+
+// writeFile => CallStack => WebApi(whoever finishes writing file first) => CallBack Q(event loop) => CallStack
+
+// writeFile, readFile, appendFile - async
+// fs.writeFileSync, fs.readFileSync, fs.appendFileSync - sync
+
+//Sync writeFile
+const [, , noOfFiles] = process.argv;
+//console.log(noOfFiles)
+const quote3 = "Happy Day";
+for (let i = 1; i <= noOfFiles; i++) {
+  fs.writeFileSync(`./backup/text-${i}.txt`, quote3),
+    console.log("Completed writing", i);
+}
