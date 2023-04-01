@@ -39,9 +39,27 @@ const quote3 = "Happy Day";
 
 //read file
 
-fs.readFile("./cool123.txt", "utf-8", (err, data) => {
-  if (err) {
-    console.log("Error ❌", err);
-  }
-  console.log("The content of the file is ✅:", data);
+// fs.readFile("./cool.txt", "utf-8", (err, data) => {
+//   if (err) {
+//     console.log("Error ❌", err);
+//   }
+//   console.log("The content of the file is ✅:", data);
+// });
+
+//append file
+
+const niceQuote = "\nMake everyday a little less ordinarily🥳";
+
+fs.appendFile("./nice.txt", niceQuote, (err) => {
+  console.log("Completed writing nice.txt");
 });
+
+fs.unlink("./toRemove.txt", (err) => {
+  console.log("Deleted Successfully");
+});
+
+fs.readdir("./backup", (err, files) => {
+  console.log("All file names", files);
+});
+
+//Task - Delete all the files in the backup folder
