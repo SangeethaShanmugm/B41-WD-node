@@ -1,8 +1,23 @@
-const express = require("express"); //3rd party package
+// const express = require("express"); //3rd party package
+// const { MongoClient } = require("mongodb");
+import express from "express";
+import { MongoClient } from "mongodb";
 const app = express();
 const PORT = 9000;
 // req - what we send/request to the server
 // res - what we receive from server
+
+// Connection URL
+const MONGO_URL = "mongodb://localhost:27017";
+
+//create connection
+async function createConnection() {
+  const client = new MongoClient(MONGO_URL);
+  await client.connect();
+  console.log("MongoDB is connected");
+  return client;
+}
+const client = await createConnection();
 
 const books = [
   {
@@ -101,18 +116,26 @@ app.get("/", (req, res) => {
 // /books?language=English&rating=8
 
 app.get("/books", (req, res) => {
-  const { language } = req.query;
+  const { language, rating } = req.query;
   console.log(req.query, language);
-  const result = books.filter((bk) => bk.language == language);
-  res.send(result);
+  let filteredBooks = books;
+  if (language) {
+    filteredBooks = filteredBooks.filter((bk) => bk.language == language);
+  }
+  if (rating) {
+    filteredBooks = filteredBooks.filter((bk) => bk.rating == rating);
+  }
+
+  res.send(filteredBooks);
 });
 
 //get Books by ID
 
-app.get("/books/:id", (req, res) => {
+app.get("/books/:id", async (req, res) => {
   const { id } = req.params;
   console.log(req.params);
-  const book = books.find((bk) => bk.id == id);
+  //db.books.findOne({id:"001"})
+  const book = await client.db("b41we").collection("books").findOne({ id: id });
   res.send(book);
 });
 
