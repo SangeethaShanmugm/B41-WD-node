@@ -6,8 +6,11 @@ import {
   addBooks,
   updateBookById,
 } from "../helper.js";
+import { auth } from "../middleware/auth.js";
+
 const router = express.Router();
-router.get("/", async (req, res) => {
+
+router.get("/", auth, async (req, res) => {
   const { language, rating } = req.query;
   console.log(req.query, language);
 
@@ -20,7 +23,7 @@ router.get("/", async (req, res) => {
 
 //get Books by ID
 
-router.get("/:id", async (req, res) => {
+router.get("/:id",auth, async (req, res) => {
   const { id } = req.params;
   console.log(req.params);
   //db..findOne({id:"001"})
