@@ -33,3 +33,10 @@ export async function createUser(username, hashedPassword) {
     .collection("users")
     .insertOne({ username: username, password: hashedPassword });
 }
+
+export async function getUserByName(username) {
+  return await client
+    .db("b41we")
+    .collection("users")
+    .findOne({ username: username });
+}
