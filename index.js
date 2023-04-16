@@ -5,7 +5,7 @@ import { MongoClient } from "mongodb";
 import * as dotenv from "dotenv";
 import { booksRouter } from "./routes/books.js";
 import { usersRouter } from "./routes/users.js";
-
+import cors from "cors";
 const app = express();
 const PORT = 9000;
 
@@ -26,6 +26,8 @@ async function createConnection() {
 export const client = await createConnection();
 
 app.use(express.json());
+app.use(cors());
+
 const books = [
   {
     id: "001",
